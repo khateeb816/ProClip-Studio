@@ -16,28 +16,42 @@ jobs:
     - name: Show Xcode version
       run: xcodebuild -version
 
-    # 🔧 FIX BROKEN XCODE PROJECT SETTINGS
+    # 🔧 FIX BROKEN XCODE PROJECT SETTINGS (SAFE VERSION)
     - name: Fix Xcode project configuration
       run: |
         cd proclipstudio_ios
-        PBX=ProClipStudio.xcodeproj/project.pbxproj
+        PBX="ProClipStudio.xcodeproj/project.pbxproj"
 
-        echo "Forcing Swift version to 5.0..."
-        sed -i '' 's/SWIFT_VERSION = "";/SWIFT_VERSION = 5.0;/g' $PBX
-        sed -i '' 's/SWIFT_VERSION = ;/SWIFT_VERSION = 5.0;/g' $PBX
+        echo "Fixing Swift version..."
+        # Replace empty Swift versions
+        sed -i '' 's/SWIFT_VERSION = "";/SWIFT_VERSION = 5.0;/g' "$PBX"
+        sed -i '' 's/SWIFT_VERSION = ;/SWIFT_VERSION = 5.0;/g' "$PBX"
 
-        echo "Injecting Swift version into all build settings..."
-        awk '
-        /buildSettings = {/ {
-            print;
-            print "                SWIFT_VERSION = 5.0;";
-            next
-        }
-        { print }
-        ' $PBX > tmp.pbxproj && mv tmp.pbxproj $PBX
+        # If Swift version is still missing, inject it
+        if ! grep -q "SWIFT_VERSION = 5.0;" "$PBX"; then
+          echo "Injecting Swift version into build settings..."
+          sed -i '' '/buildSettings = {/a\
+                SWIFT_VERSION = 5.0;
+          ' "$PBX"
+        fi
 
         echo "Fixing PRODUCT_NAME..."
-        sed -i '' 's/PRODUCT_NAME = "";/PRODUCT_NAME = ProClipStudio;/g' $PBX
+        sed -i '' 's/PRODUCT_NAME = "";/PRODUCT_NAME = ProClipStudio;/g' "$PBX"
 
         echo "Fixing broken .app output path..."
-        sed -i '' 's|Release-iphoneos/.app|Release-i
+        sed -i '' 's|Release-iphoneos/.app|Release-iphoneos/ProClipStudio.app|g' "$PBX"
+
+        echo "Xcode project fixed successfully."
+
+    # 🏗 BUILD IOS APP
+    - name: Build iOS app
+      run: |
+        cd proclipstudio_ios
+        xcodebuild \
+          -project ProClipStudio.xcodeproj \
+          -scheme ProClipStudio \
+          -sdk iphoneos \
+          -configuration Release \
+          -destination 'generic/platform=iOS' \
+          clean build \
+          CODE_SIGNING_ALLOWED=NO
