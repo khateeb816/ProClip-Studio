@@ -102,7 +102,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				001 /* ProClipStudioApp.swift in Sources */,
-				001 /* ProClipStudioApp.swift in Sources */,
 				002 /* ContentView.swift in Sources */,
 				004 /* ClipEngine.swift in Sources */,
 				005 /* VideoPicker.swift in Sources */,
