@@ -20,8 +20,7 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPhotsLibraryUsageDescription</key>
-	<string>ProClip Studio needs access to your photo library to select videos for clipping.</string>
+
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>ProClip Studio needs access to your photo library to select videos for clipping.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

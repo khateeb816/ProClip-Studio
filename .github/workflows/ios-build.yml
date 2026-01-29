@@ -23,5 +23,19 @@ jobs:
           -scheme ProClipStudio \
           -sdk iphoneos \
           -configuration Release \
+          -derivedDataPath build \
           clean build \
           CODE_SIGNING_ALLOWED=NO
+
+    - name: Package IPA
+      run: |
+        cd proclipstudio_ios/build/Build/Products/Release-iphoneos
+        mkdir Payload
+        cp -r ProClipStudio.app Payload/
+        zip -r ProClipStudio.ipa Payload
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ProClipStudio-iOS-IPA
+        path: proclipstudio_ios/build/Build/Products/Release-iphoneos/ProClipStudio.ipa
