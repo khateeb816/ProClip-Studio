@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		001 /* ProClipStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101 /* ProClipStudioApp.swift */; };
 		002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102 /* ContentView.swift */; };
+		004 /* ClipEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105 /* ClipEngine.swift */; };
+		005 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106 /* VideoPicker.swift */; };
+		006 /* AudioPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107 /* AudioPicker.swift */; };
+		007 /* ExportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108 /* ExportManager.swift */; };
+		008 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109 /* Enums.swift */; };
 
 /* End PBXBuildFile section */
 
@@ -16,6 +21,11 @@
 		101 /* ProClipStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProClipStudioApp.swift; sourceTree = "<group>"; };
 		102 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		105 /* ClipEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipEngine.swift; sourceTree = "<group>"; };
+		106 /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
+		107 /* AudioPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPicker.swift; sourceTree = "<group>"; };
+		108 /* ExportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManager.swift; sourceTree = "<group>"; };
+		109 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Enums.swift; sourceTree = "<group>"; };
 		104 /* ProClipStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProClipStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -26,6 +36,11 @@
 			children = (
 				101 /* ProClipStudioApp.swift */,
 				102 /* ContentView.swift */,
+				105 /* ClipEngine.swift */,
+				106 /* VideoPicker.swift */,
+				107 /* AudioPicker.swift */,
+				108 /* ExportManager.swift */,
+				109 /* Enums.swift */,
 				103 /* Info.plist */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +102,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				001 /* ProClipStudioApp.swift in Sources */,
+				001 /* ProClipStudioApp.swift in Sources */,
 				002 /* ContentView.swift in Sources */,
+				004 /* ClipEngine.swift in Sources */,
+				005 /* VideoPicker.swift in Sources */,
+				006 /* AudioPicker.swift in Sources */,
+				007 /* ExportManager.swift in Sources */,
+				008 /* Enums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
