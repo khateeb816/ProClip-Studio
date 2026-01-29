@@ -16,32 +16,49 @@ jobs:
     - name: Show Xcode version
       run: xcodebuild -version
 
-    # 🔧 FIX BROKEN XCODE PROJECT SETTINGS (SAFE VERSION)
+    # 🔧 FIX ALL BROKEN XCODE PROJECT SETTINGS
     - name: Fix Xcode project configuration
       run: |
         cd proclipstudio_ios
         PBX="ProClipStudio.xcodeproj/project.pbxproj"
 
-        echo "Fixing Swift version..."
-        # Replace empty Swift versions
+        echo "==== Fixing Swift Version ===="
         sed -i '' 's/SWIFT_VERSION = "";/SWIFT_VERSION = 5.0;/g' "$PBX"
         sed -i '' 's/SWIFT_VERSION = ;/SWIFT_VERSION = 5.0;/g' "$PBX"
 
-        # If Swift version is still missing, inject it
         if ! grep -q "SWIFT_VERSION = 5.0;" "$PBX"; then
-          echo "Injecting Swift version into build settings..."
           sed -i '' '/buildSettings = {/a\
                 SWIFT_VERSION = 5.0;
           ' "$PBX"
         fi
 
-        echo "Fixing PRODUCT_NAME..."
+        echo "==== Fixing App Naming ===="
         sed -i '' 's/PRODUCT_NAME = "";/PRODUCT_NAME = ProClipStudio;/g' "$PBX"
+        sed -i '' 's/EXECUTABLE_NAME = "";/EXECUTABLE_NAME = ProClipStudio;/g' "$PBX"
+        sed -i '' 's/WRAPPER_NAME = "";/WRAPPER_NAME = ProClipStudio.app;/g' "$PBX"
 
-        echo "Fixing broken .app output path..."
+        if ! grep -q "PRODUCT_NAME = ProClipStudio;" "$PBX"; then
+          sed -i '' '/buildSettings = {/a\
+                PRODUCT_NAME = ProClipStudio;
+          ' "$PBX"
+        fi
+
+        if ! grep -q "EXECUTABLE_NAME = ProClipStudio;" "$PBX"; then
+          sed -i '' '/buildSettings = {/a\
+                EXECUTABLE_NAME = ProClipStudio;
+          ' "$PBX"
+        fi
+
+        if ! grep -q "WRAPPER_NAME = ProClipStudio.app;" "$PBX"; then
+          sed -i '' '/buildSettings = {/a\
+                WRAPPER_NAME = ProClipStudio.app;
+          ' "$PBX"
+        fi
+
+        echo "==== Fixing broken .app output path ===="
         sed -i '' 's|Release-iphoneos/.app|Release-iphoneos/ProClipStudio.app|g' "$PBX"
 
-        echo "Xcode project fixed successfully."
+        echo "Xcode project configuration fully repaired."
 
     # 🏗 BUILD IOS APP
     - name: Build iOS app
