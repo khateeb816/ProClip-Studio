@@ -80,6 +80,7 @@ body {
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--text-main);
+    white-space: nowrap;
 }
 
 .nav-logo-img {
@@ -134,6 +135,7 @@ body {
     padding: 8px 20px;
     border-radius: 50px;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .nav-btn:hover {
@@ -478,13 +480,12 @@ footer {
         height: 64px;
     }
 
-    .logo {
-        font-size: 1.1rem;
-        gap: 6px;
+    .logo span {
+        display: none;
     }
     
     .nav-logo-img {
-        height: 24px;
+        height: 32px;
     }
 
     .nav-btn {
